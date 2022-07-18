@@ -1,0 +1,75 @@
+openapi: '3.0.2'
+info:
+  title: Todo Notes 
+  version: '1.0'
+servers:
+  - url: https://localhost:5000
+    description: local server can be run by using "flask run" command in command shell before running "flask shell" navigate to 
+                  folder's path and also activate the virtual environment using command "source .venv/Scripts/activate" in Unix or
+                  ".venv/Scripts/activate" in Windows.
+paths:
+  /todo_note:
+    get:
+      summary: Gives an array of all the todo_notes in the database
+      responses:
+        '200':
+          description: returns a json array of objects in which each objects contains a todo note and corresponding todos for that 
+                        note 
+    post:
+      summary: Can be used to add todo_note to the database
+      responses:
+        '200':
+          description: returns a json object of the contents added. In order for this to be succesfull we need to pass a json object with 
+                        key "todo_note" and value contains the contents of the todo_note. The value should be a string.
+  /todo_note/<string:todo_note>:
+    get:
+      summary: Gives the content of the todo_note given
+      responses:
+        '200':
+          description: returns a json object which contains the content of the todo_note which was mentioned in the URL. 
+                        The contents will be the todos contained in the todo_note and the todo_note
+    put:
+      summary: Can be used to update the todo_note
+      responses:
+        '200':
+          description: returns a json object with the updated contents of the todo_note. In order for the request to be succesfull
+                        a json object should be passed with todo_note as key and the value should be of String datatype.
+    delete:
+      summary: Can be used to delete a todo_note. Deleting a todo_note also deletes all its todos
+      responses:
+        '200':
+          description: returns a json object with the contents of the todo_note which is deleted if the mentioned todo_note is present
+                        in the database.
+
+  /todo_note/<string:todo_note>/todo:
+    get:
+      summary: Gives the content of all todo in a particular todo_note
+      responses:
+        '200':
+          description: returns a json array of objects with each object containing the contents of all the todo present in the todo_note
+    post:
+      summary: Can be used to add todos to a particular todo_note
+      responses:
+        '200':
+          description: returns a json object with contents added. In order for the request to be succesfull we need to pass a json
+            object with two keys one is todo and the other is completed.
+    
+  /todo_note/<string:todo_note>/todo/<string:todo>:
+    get:
+      summary: Gives the contents of a particular todo in a todo_note 
+      responses:
+        '200':
+          description: returns a json object with the contents of todo contained in a todo_note which are both mentioned in the url 
+    put:
+      summary: Can be used to update the completed status of a particular todo
+      responses:
+        '200':
+          description: returns a json object with the updated contents of todo. In order for the request to work we need to pass 
+                      a json object with completed a key and yes or no as the value of it.
+    delete:
+      summary: Can be used to delete a particular todo
+      responses:
+        '200':
+          description: returns a json object of the todo which was deleted. In order for the request to be succesfull the todo and the 
+                        todo_note should be present in the database.
+
