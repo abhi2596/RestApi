@@ -5,7 +5,7 @@
 #### flask_sqlalchemy
 #### flask_marshmallow 
 
-All the requirements required for the system are in the .venv folder. The only requirement is 
+All the requirements required for the system are in the .venv folder. The only requirement is to
 have python in the system. We need to activate the virtual environment to do this we need to 
 navigate to the path this folder is present and then in Unix use this command 
 "source .venv/Scripts/activate"
